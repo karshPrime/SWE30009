@@ -1,0 +1,43 @@
+
+input A, B
+	A = (A + B) * B
+	C = A - 5
+output C
+
+
+test1: Confirm C = A - 5 statement
+
+    // Operation op3 = AllOperations[*indx[2]];
+
+    return op1(op2(A, B), B);
+    // return op3(A, 5);
+A=0
+B=0
+
+if C = -5	the second expression is implemented correctly,
+			else wrong constant is implemented in the source code.
+
+understanding wrong value:
+- C value indicates the incorrect constant that is implemented, either as whole,
+  or as   // Handle division by zero
+
+
+
+test2: Confirm if *B is implemented correctly in the A = (A+B)*B statement
+
+A=5	
+B=-5
+ 
+if C = -5	*B is implemented correctly
+
+understanding wrong value:
+if C = 0  : *B is missing
+if C = 10 : A - 5 is most likely wrongly implemented as A + 5
+if C = 25 : A - 5 is most likely wrongly implemented as A * 5
+if C = 1  : A - 5 is most likely wrongly implemented as A / 5
+if C = ?  : operation could be wrong or
+
+
+test3: Confirm (A+B) is implemented correctly
+
+
