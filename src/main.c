@@ -82,6 +82,9 @@ bool run(int A, int B) {
     }
 
 	if (copyCounter == 3) {
+		printf("---\nA = %d. Non-unique values: %d\n",
+			A, copyCounter);
+
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				for(int k = 0; k < 3; k++) {
@@ -95,9 +98,7 @@ bool run(int A, int B) {
 				printf("\n");
 			}
 		}
-
 		// printf("Unique Values = %s\n", allUnique ? "true" : "false");
-		printf("A = %d. Non-unique values: %d\n---\n", A, copyCounter);
 	}
 
 	return allUnique;
@@ -107,7 +108,7 @@ int main() {
 	int uniqueCounter = 0;
 	int uniqueA[200];
 
-	for (int A = -100; A < 101; A++) {
+	for (int A = -100; A < -98; A++) {
 		if (run(A, 2)) {
 			uniqueA[++uniqueCounter] = A;
 		}
