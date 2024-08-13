@@ -90,7 +90,7 @@ bool run(int A, int B) {
 					const int index = k+(j*3)+(i*9);
 					int C = results[index];
 
-					printf("C = ((A %c B) %c B) %c 5 = %d\t",
+					printf("C = ((A %c B) %c B) %c 5 = %-10d",
 						OpType[i], OpType[j], OpType[k], C
 					);
 				}
