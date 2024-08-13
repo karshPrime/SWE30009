@@ -21,12 +21,11 @@ all: $(TARGET)
 
 # Linking
 $(TARGET): $(OBJS)
-	@echo "Linking..."
 	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB_DIR) -lm
 
 # Compilation
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@echo "Compiling..."
+	@echo "Building..."
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OBJ_DIR):
@@ -38,7 +37,7 @@ debug: $(TARGET)
 
 # Debug Compilation
 debug_compile:
-	@echo "Compiling for Debug..."
+	@echo "Building for Debug..."
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -g -L$(LIB_DIR) -lm
 
