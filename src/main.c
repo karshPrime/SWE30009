@@ -108,7 +108,7 @@ int main() {
 	int uniqueCounter = 0;
 	int uniqueA[200];
 
-	for (int A = -100; A < -98; A++) {
+	for (int A = -100; A < 101; A++) {
 		if (run(A, 2)) {
 			uniqueA[++uniqueCounter] = A;
 		}
