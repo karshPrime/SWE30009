@@ -1,38 +1,5 @@
 
-// int main2() {
-// 	printf("Testing for possible incorrect use of arithmetic operato\n");
-//
-// 	printf("Initialising random Operators\n");
-//     srand(time(NULL));
-//     const Index rIndexes = { rand() % 3, rand() % 3, rand() % 3 };
-//
-//     printf("Test1: Confirm \"C=A-5\" with A=0 & B=1\n");
-//     switch (test_me(&rIndexes, 0, 1)) {
-// 		case -4:
-// 			printf("Confirm it's not \"C=+5\".\n");
-// 			break;
-//
-// 		case 5:
-// 			printf("Test Fail: wrongfully implemented as \"C=A+5\".");
-// 			break;
-//
-// 		default:
-// 			break;
-// 	}
-//
-//     printf("Test1: ");
-//     switch (test_me(&rIndexes, 5, 0)) {
-// 		case 12:
-// 			break;
-//
-// 		default:
-// 			break;
-// 	}
-//
-//     return 0;
-// }
 #include <stdio.h>
-#include <stdbool.h>
 
 // Function definitions
 int add(int num1, int num2)      { return num1 + num2; }
@@ -46,7 +13,6 @@ char OpType[] = { '+', '-', '*' };
 
 // Function to test operations
 int test_me(const Index* indx, int A, int B) {
-    // Get the operations based on indices
     Operation op1 = AllOperations[(*indx)[0]];
     Operation op2 = AllOperations[(*indx)[1]];
     Operation op3 = AllOperations[(*indx)[2]];
@@ -55,70 +21,59 @@ int test_me(const Index* indx, int A, int B) {
     return op3(lA, 5);
 }
 
-bool run(int A, int B) {
-	int results[27];
+void run(int A, int B) {
+	int result[27];
 
-	bool allUnique = true;
-	int  copyCounter = 0;
-
+	int copyCounter = 0;
+	int sameAsResult = 0;
+	
+    Index rIndexes = {0, 2, 1};
+	const int cResult = test_me(&rIndexes, A, B);
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for(int k = 0; k < 3; k++) {
-                Index rIndexes = {i, j, k};
+				if (i == 0 && j == 2 && k == 1) {
+					printf("^C = ((A + B) * B) - 5 = %-8d", cResult);
+					continue;
+				}
+
+				const int index = k + (j*3) + (i*9);
+
+				rIndexes[0] = i, rIndexes[1] = j, rIndexes[2] = k;
                 int C = test_me(&rIndexes, A, B);
-				const int index = k+(j*3)+(i*9);
+
+				printf(" C = ((A %c B) %c B) %c 5 = %-8d",
+					OpType[i], OpType[j], OpType[k], C
+				);
 
 				for (int l = 0; l < index; l++) {
-					if (results[l] == C) {
-						allUnique = false;
+					if (result[l] == C) {
 						copyCounter++;
 					}
 				}
-				results[index] = C;
+
+				if (cResult == C) {
+					sameAsResult++;
+				}
+
+				result[index] = C;
             }
+			printf("\n");
         }
     }
 
-	// if (copyCounter == 17) {
-		printf("---\n %d Non-unique values for A = %d\n",
-			copyCounter, A);
-
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				for(int k = 0; k < 3; k++) {
-					const int index = k+(j*3)+(i*9);
-					int C = results[index];
-
-					printf("C = ((A %c B) %c B) %c 5 = %-10d",
-						OpType[i], OpType[j], OpType[k], C
-					);
-				}
-				printf("\n");
-			}
-		// }
-		// printf("Unique Values = %s\n", allUnique ? "true" : "false");
-	}
-
-	return allUnique;
+	printf("Testing for A = %-8d & B = %-8d | ", A, B);
+	printf("%-2d same values as result. | ", sameAsResult);
+	printf("%-2d repeated values.\n", copyCounter);
 }
 
 int main() {
-	int uniqueCounter = 0;
-	int uniqueA[200];
+	for (int A = -1000; A < 1001; A++)
+		// for (int B = -1000; B < 1001; B++)
+			run(A, 2);
 
-	for (int A = -1000000; A < -999998; A++) {
-		if (run(A, 2)) {
-			uniqueA[uniqueCounter] = A;
-			uniqueCounter++;
-		}
-	}
-
-	printf("---\nunique counter = %d\n", uniqueCounter);
-
-	for (int i = 0; i < uniqueCounter; i++) {
-		printf("A is not valid for %d\n", uniqueA[i]);
-	}
-
+	
 	return 0;
 }
+
