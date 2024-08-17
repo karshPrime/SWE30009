@@ -63,13 +63,13 @@ void run(int A, int B) {
         }
     }
 
-	printf("Testing for A = %-8d & B = %-8d | ", A, B);
-	printf("%-2d same values as result. | ", sameAsResult);
-	printf("%-2d repeated values.\n", copyCounter);
+	printf("Testing for A = %d & B = %d || ", A, B);
+	printf("%-2d same values as result. || ", sameAsResult);
+	printf("%-2d repeated values.\n---\n", copyCounter);
 }
 
 int main() {
-	for (int A = -1000; A < 1001; A++)
+	for (int A = -1; A < 10; A++)
 		// for (int B = -1000; B < 1001; B++)
 			run(A, 2);
 
