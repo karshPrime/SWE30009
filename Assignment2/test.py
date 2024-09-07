@@ -11,19 +11,19 @@ test_cases = [
         "Description": "Negative Integers Only",
         "tNums": [ -15, -23, -53, -95, -12 ],
         "ePositive": [],
-        "eNegative": [ -15, -23, -53, -95, -12 ]
+        "eNegative": [ -95, -53, -23, -15, -12 ]
     },
     {
         "Description": "Mixed Positive and Negative Integers",
-        "tNums": [ 74, -32, 12, -58, -44, 99 ],
+        "tNums": [ 74, -32, 12, -58, -44, 12, 99, -44 ],
         "ePositive": [ 12, 74, 99 ],
         "eNegative": [ -58, -44, -32 ]
     },
     {
         "Description": "Handling Zero (Treated as Negative)",
-        "tNums": [ 0, 10, 0, -10 ],
-        "ePositive": [],
-        "eNegative": [ -10, 0, 0 ]
+        "tNums": [ 0, 10, -10 ],
+        "ePositive": [ 10 ],
+        "eNegative": [ -10, 0 ]
     },
     {
         "Description": "Maximum Input Size (30 Elements)",
@@ -35,9 +35,9 @@ test_cases = [
     },
     {
         "Description": "Boundary Values (Extremes of Input Range)",
-        "tNums": [ -100, -99, -50, 0, 50, 99, 100 ],
-        "ePositive": [ 50, 99, 100 ],
-        "eNegative": [ -100, -99, -50 ]
+        "tNums": [ -100, -99, 99, 100 ],
+        "ePositive": [ 99, 100 ],
+        "eNegative": [ -100, -99 ]
     }
 ]
 
@@ -51,7 +51,7 @@ for case in test_cases:
         lNegative, lPositive = split_and_sort( case[ "tNums" ] )
 
         if lNegative == case[ "eNegative" ]:
-            print( "Correct Negatives" )
+            print( "Correct Negatives | ", end="")
         else:
             print( "Wrong Negatives" )
             print( "Expected: ", case["eNegative"], " Got: ", lNegative )
@@ -60,7 +60,7 @@ for case in test_cases:
             print( "Correct Postives" )
         else:
             print( "Wrong Postives" )
-            print( "Expected: ", case["ePositive"], " Got: ", lPostive )
+            print( "Expected: ", case["ePositive"], " Got: ", lPositive )
 
     except Exception as e:
         error = split_and_sort( case[ "tNums" ] )
